@@ -48,6 +48,10 @@ SOFTWARE.
                 text-align: center;
             }
 
+            img {
+                padding-right: 4px;
+            }
+
             .central-box {
                 background-color: #403D39;
                 margin: 5vh auto;
@@ -101,15 +105,59 @@ SOFTWARE.
         </style>
     </head>
     <body>
+        <noscript>Warning: your browser has JavaScript disabled and so this page may not display correctly!</noscript>
         <h1>Nucleoid Library Versions</h1>
 
         <div class="central-box">
-            <div class="box-content">
-                <img alt="Fantasy version badge" src="https://img.shields.io/maven-metadata/v?color=%23579B67&label=Fantasy&metadataUrl=https%3A%2F%2Fmaven.nucleoid.xyz%2Fxyz%2Fnucleoid%2Ffantasy%2Fmaven-metadata.xml">
-                <img alt="Leukocyte version badge" src="https://img.shields.io/maven-metadata/v?color=%23579B67&label=Leukocyte&metadataUrl=https%3A%2F%2Fmaven.nucleoid.xyz%2Fxyz%2Fnucleoid%2Fleukocyte%2Fmaven-metadata.xml">
-                <img alt="packet-tweaker version badge" src="https://img.shields.io/maven-metadata/v?color=%23579B67&label=packet-tweaker&metadataUrl=https%3A%2F%2Fmaven.nucleoid.xyz%2Fxyz%2Fnucleoid%2Fpacket-tweaker%2Fmaven-metadata.xml">
-                <img alt="Plasmid version badge" src="https://img.shields.io/maven-metadata/v?color=%23579B67&label=Plasmid&metadataUrl=https%3A%2F%2Fmaven.nucleoid.xyz%2Fxyz%2Fnucleoid%2Fplasmid%2Fmaven-metadata.xml">
-                <img alt="Substrate version badge" src="https://img.shields.io/maven-metadata/v?color=%23579B67&label=Substrate&metadataUrl=https%3A%2F%2Fmaven.nucleoid.xyz%2Fxyz%2Fnucleoid%2Fsubstrate%2Fmaven-metadata.xml">
+            <div class="box-content" id='libs-box'>
+                <script>
+                    const holder = document.getElementById('libs-box');
+                    function createLibraryBadge(lib) {
+                        const link = document.createElement('a');
+                        link.href = lib.github_repo;
+                        const img = document.createElement('img');
+                        img.src = `https://img.shields.io/maven-metadata/v?color=%23579B67&label=${lib.display_name}&metadataUrl=${encodeURIComponent(lib.metadata_url)}`;
+                        img.alt = `${lib} version badge`;
+                        link.appendChild(img);
+                        holder.appendChild(link);
+                    }
+                    const createMetaUrl = (group, name) => {
+                        return `https://maven.nucleoid.xyz/${group.replaceAll('.', '/')}/${name}/maven-metadata.xml`;
+                    }
+
+                    [
+                        {
+                            display_name: 'Fantasy',
+                            github_repo: 'https://github.com/NucleoidMC/fantasy',
+                            metadata_url: createMetaUrl('xyz.nucleoid', 'fantasy'),
+                        },
+                        {
+                            display_name: 'Leukocyte',
+                            github_repo: 'https://github.com/NucleoidMC/leukocyte',
+                            metadata_url: createMetaUrl('xyz.nucleoid', 'leukocyte'),
+                        },
+                        {
+                            display_name: 'packet-tweaker',
+                            github_repo: 'https://github.com/NucleoidMC/packet-tweaker',
+                            metadata_url: createMetaUrl('xyz.nucleoid', 'packet-tweaker'),
+                        },
+                        {
+                            display_name: 'Plasmid',
+                            github_repo: 'https://github.com/NucleoidMC/plasmid',
+                            metadata_url: createMetaUrl('xyz.nucleoid', 'plasmid'),
+                        },
+                        {
+                            display_name: 'Substrate',
+                            github_repo: 'https://github.com/NucleoidMC/substrate',
+                            metadata_url: createMetaUrl('xyz.nucleoid', 'substrate'),
+                        },
+                        {
+                            display_name: 'server-translations-api',
+                            github_repo: 'https://github.com/arthurbambou/Server-Translations/',
+                            metadata_url: createMetaUrl('fr.catcore', 'server-translations-api'),
+                        }
+                    ].forEach(createLibraryBadge);
+                </script>
             </div>
         </div>
 
